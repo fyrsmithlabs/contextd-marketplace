@@ -8,7 +8,8 @@
     "skills/using-contextd",
     "skills/cross-session-memory",
     "skills/checkpoint-workflow",
-    "skills/error-remediation"
+    "skills/error-remediation",
+    "skills/session-lifecycle"
   ],
   "commands": [
     "commands/checkpoint.md",
