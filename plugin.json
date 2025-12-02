@@ -1,0 +1,24 @@
+{
+  "name": "contextd",
+  "version": "0.1.0",
+  "description": "Cross-session memory and context management for AI agents",
+  "author": "fyrsmithlabs",
+  "repository": "https://github.com/fyrsmithlabs/contextd-marketplace",
+  "skills": [
+    "skills/using-contextd",
+    "skills/cross-session-memory",
+    "skills/checkpoint-workflow",
+    "skills/error-remediation"
+  ],
+  "commands": [
+    "commands/checkpoint.md",
+    "commands/remember.md",
+    "commands/diagnose.md",
+    "commands/resume.md",
+    "commands/status.md",
+    "commands/search.md"
+  ],
+  "requires": {
+    "mcp": ["contextd"]
+  }
+}
