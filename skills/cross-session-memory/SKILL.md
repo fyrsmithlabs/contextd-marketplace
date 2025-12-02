@@ -88,11 +88,42 @@ Adjusts confidence: helpful increases, unhelpful decreases.
 - Patterns that apply broadly
 - Mistakes and why they failed
 - Workarounds for known issues
+- **Design decisions with significant user input**
 
 **Skip recording**:
 - Trivial fixes (typos, syntax)
 - One-off configurations
 - Project-specific details (put in CLAUDE.md)
+
+## Recording Design Decisions (The WHY)
+
+**When design involves significant user input/discussion, always capture:**
+
+1. **WHAT** was decided
+2. **WHY** that approach (rejected alternatives, tradeoffs)
+3. **CONSEQUENCES** (what changes, what to watch for)
+
+**Rule: Lots of user input = needs a why.**
+
+The discussion IS the value - don't just record the outcome.
+
+**Format for design memories:**
+
+```json
+{
+  "project_id": "contextd",
+  "title": "ADR: Registry interface pattern for DI",
+  "content": "DECISION: Use Registry interface with accessor methods.\n\nWHY: Idiomatic Go, single mock for tests, clear dependency boundary.\n\nREJECTED: Passing individual services (constructor bloat), concrete struct (can't mock), global singleton (untestable).\n\nCONSEQUENCES: All service access via registry.Service().Method(), new services require interface update.",
+  "outcome": "success",
+  "tags": ["adr", "architecture", "patterns", "design-decision"]
+}
+```
+
+**Also write to docs:**
+- Save design doc: `docs/plans/YYYY-MM-DD-<topic>-design.md`
+- Save ADR: `docs/plans/YYYY-MM-DD-<topic>-adr.md`
+
+Memory should be searchable by both the decision AND the reasoning.
 
 ## Quick Reference
 
@@ -112,3 +143,18 @@ Adjusts confidence: helpful increases, unhelpful decreases.
 | Only recording successes | Failures prevent repeated mistakes |
 | Vague memory content | Be specific: what, why, how |
 | Never giving feedback | Feedback improves future rankings |
+| **Assuming without searching** | **Always search before re-deriving** |
+| Recording WHAT without WHY | Design decisions need rejected alternatives |
+
+## CRITICAL: Search Before Assuming
+
+**Before assuming something doesn't exist or needs to be designed from scratch:**
+
+1. `memory_search` - Have we solved this before?
+2. `checkpoint_list` - Is there recent work on this?
+3. `repository_index` search - Is there existing code/docs?
+4. `remediation_search` - Have we fixed related errors?
+
+**You will waste significant time re-discovering things that are already documented.**
+
+This conversation you're in right now? Previous sessions probably covered it. Search first.
