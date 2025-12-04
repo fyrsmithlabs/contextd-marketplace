@@ -30,6 +30,26 @@ claude plugins install fyrsmithlabs/contextd-marketplace
 | `/contextd:status` | Show contextd state |
 | `/contextd:search` | Search memories and remediations |
 
+## Schema Reference
+
+The plugin includes a JSON Schema for all MCP tool inputs/outputs:
+
+```
+schemas/contextd-mcp-tools.schema.json
+```
+
+**Usage with @ imports** (lazy loaded):
+```
+@~/.claude/schemas/contextd-mcp-tools.schema.json
+```
+
+The schema covers:
+- All 10 MCP tools (checkpoint_*, memory_*, remediation_*, repository_index, troubleshoot_diagnose)
+- Skill file format (SKILL.md frontmatter structure)
+- Input/output types with descriptions and validation
+
+The schema is symlinked to `~/.claude/schemas/` on install for global access.
+
 ## What is contextd?
 
 contextd provides persistent memory for AI agents:

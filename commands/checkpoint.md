@@ -15,3 +15,11 @@ Then call `mcp__contextd__checkpoint_save` with:
 - token_count: Estimated tokens used
 
 Confirm the checkpoint was saved and provide the checkpoint ID.
+
+## Error Handling
+
+If the MCP call fails:
+1. Check if contextd server is running: `curl -s http://localhost:9090/health`
+2. If server is down: "contextd server not responding. Start it with `contextd serve` or check logs."
+3. If connection refused: "Cannot connect to contextd. Verify MCP server is configured in Claude settings."
+4. For other errors: Display the error message and suggest checking contextd logs.

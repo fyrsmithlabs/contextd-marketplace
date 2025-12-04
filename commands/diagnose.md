@@ -17,3 +17,18 @@ Take the error message from the command argument or ask the user to provide it.
    - Recommended next steps
 
 4. If a fix is found and applied successfully, offer to record it with `remediation_record`.
+
+## Error Handling
+
+If `troubleshoot_diagnose` fails:
+- Fall back to manual analysis using the error message
+- Still attempt `remediation_search` for past fixes
+
+If `remediation_search` fails:
+- Continue with diagnosis results only
+- Note: "Could not search past remediations. Proceeding with AI diagnosis only."
+
+If both fail:
+1. Check if contextd server is running: `curl -s http://localhost:9090/health`
+2. If server is down: "contextd server not responding. Falling back to manual debugging."
+3. Proceed with standard debugging approach without contextd assistance.

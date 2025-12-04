@@ -21,3 +21,25 @@ Gather and display:
    - Count by category
 
 Format as a clean status report showing what contextd knows about this project.
+
+## Error Handling
+
+If any MCP call fails, show partial results with status indicators:
+
+```
+## contextd Status
+
+**Session Info**
+- Tenant: fyrsmithlabs
+- Project: /home/user/projects/contextd
+- Session: sess_abc123
+
+**Memories**: ✅ 12 found (3 high confidence)
+**Checkpoints**: ✅ 4 available
+**Remediations**: ❌ Could not fetch (server error)
+```
+
+If all calls fail:
+1. Check server: `curl -s http://localhost:9090/health`
+2. Display: "contextd server not responding. Status unavailable."
+3. Suggest: "Start contextd with `contextd serve` or verify MCP configuration."

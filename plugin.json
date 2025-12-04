@@ -1,6 +1,6 @@
 {
   "name": "contextd",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Cross-session memory and context management for AI agents",
   "author": "fyrsmithlabs",
   "repository": "https://github.com/fyrsmithlabs/contextd-marketplace",
@@ -17,9 +17,14 @@
     "commands/diagnose.md",
     "commands/resume.md",
     "commands/status.md",
-    "commands/search.md"
+    "commands/search.md",
+    "commands/test-skill.md"
+  ],
+  "schemas": [
+    "schemas/contextd-mcp-tools.schema.json"
   ],
   "requires": {
     "mcp": ["contextd"]
-  }
+  },
+  "postInstall": "ln -sf $(pwd)/schemas/contextd-mcp-tools.schema.json ~/.claude/schemas/ 2>/dev/null || true"
 }
