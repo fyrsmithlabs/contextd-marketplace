@@ -11,8 +11,8 @@
     {
       "name": "contextd",
       "source": ".",
-      "version": "0.2.0",
-      "description": "Cross-session memory and context management for AI agents. Provides skills for session lifecycle, checkpoints, error remediation, and persistent learning across sessions.",
+      "version": "0.3.0",
+      "description": "Cross-session memory and context management for AI agents. Provides skills, agents, and includes for session lifecycle, checkpoints, error remediation, and persistent learning across sessions.",
       "author": "fyrsmithlabs",
       "homepage": "https://github.com/fyrsmithlabs/contextd-marketplace",
       "license": "MIT",

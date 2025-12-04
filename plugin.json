@@ -1,6 +1,6 @@
 {
   "name": "contextd",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Cross-session memory and context management for AI agents",
   "author": "fyrsmithlabs",
   "repository": "https://github.com/fyrsmithlabs/contextd-marketplace",
@@ -20,11 +20,17 @@
     "commands/search.md",
     "commands/test-skill.md"
   ],
+  "agents": [
+    "agents/contextd-task-executor.md"
+  ],
+  "includes": [
+    "includes/contextd-protocol.md"
+  ],
   "schemas": [
     "schemas/contextd-mcp-tools.schema.json"
   ],
   "requires": {
     "mcp": ["contextd"]
   },
-  "postInstall": "ln -sf $(pwd)/schemas/contextd-mcp-tools.schema.json ~/.claude/schemas/ 2>/dev/null || true"
+  "postInstall": "mkdir -p ~/.claude/schemas ~/.claude/agents ~/.claude/includes && ln -sf $(pwd)/schemas/contextd-mcp-tools.schema.json ~/.claude/schemas/ && ln -sf $(pwd)/agents/contextd-task-executor.md ~/.claude/agents/ && ln -sf $(pwd)/includes/contextd-protocol.md ~/.claude/includes/ 2>/dev/null || true"
 }

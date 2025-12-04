@@ -1,7 +1,7 @@
 # contextd-marketplace
 
 [![Plugin](https://img.shields.io/badge/claude--code-plugin-blue)](https://github.com/fyrsmithlabs/contextd-marketplace)
-[![Version](https://img.shields.io/badge/version-0.2.0-green)](https://github.com/fyrsmithlabs/contextd-marketplace/releases)
+[![Version](https://img.shields.io/badge/version-0.3.0-green)](https://github.com/fyrsmithlabs/contextd-marketplace/releases)
 
 Claude Code plugin for [contextd](https://github.com/fyrsmithlabs/contextd) - cross-session memory and context management for AI agents.
 
@@ -112,6 +112,30 @@ Restart Claude Code to load both the MCP server and plugin.
 | `/contextd:status` | Show contextd state for project |
 | `/contextd:search` | Search memories and remediations |
 | `/contextd:test-skill` | Run pressure tests against skills |
+
+## Agents
+
+| Agent | Purpose |
+|-------|---------|
+| `contextd:contextd-task-executor` | Task executor enforcing contextd-first workflow with pre/post-flight checks |
+
+Use with the Task tool:
+```
+Task(subagent_type="contextd:contextd-task-executor", prompt="...")
+```
+
+## Includes
+
+Reusable protocol snippets for your own agents/commands:
+
+| Include | Purpose |
+|---------|---------|
+| `contextd-protocol.md` | Compact contextd protocol reference (pre-flight, error handling, post-flight) |
+
+Reference in your files:
+```
+@~/.claude/includes/contextd-protocol.md
+```
 
 ## MCP Tools
 
