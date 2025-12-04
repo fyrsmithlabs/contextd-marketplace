@@ -1,0 +1,34 @@
+{
+  "name": "contextd-marketplace",
+  "version": "1.0.0",
+  "description": "Cross-session memory and context management plugins for Claude Code",
+  "owner": {
+    "name": "fyrsmithlabs",
+    "email": "dustinhendel@gmail.com",
+    "url": "https://github.com/fyrsmithlabs"
+  },
+  "plugins": [
+    {
+      "name": "contextd",
+      "source": ".",
+      "version": "0.2.0",
+      "description": "Cross-session memory and context management for AI agents. Provides skills for session lifecycle, checkpoints, error remediation, and persistent learning across sessions.",
+      "author": "fyrsmithlabs",
+      "homepage": "https://github.com/fyrsmithlabs/contextd-marketplace",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": [
+        "memory",
+        "context",
+        "checkpoints",
+        "session",
+        "learning",
+        "mcp",
+        "persistence"
+      ],
+      "requires": {
+        "mcp": ["contextd"]
+      }
+    }
+  ]
+}
