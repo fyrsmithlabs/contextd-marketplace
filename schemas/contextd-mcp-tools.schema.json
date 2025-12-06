@@ -269,6 +269,7 @@
       "properties": {
         "path": { "type": "string", "description": "Repository path to index" },
         "tenant_id": { "type": "string", "description": "Tenant identifier (defaults to git username)" },
+        "branch": { "type": "string", "description": "Git branch to index (auto-detects if empty)" },
         "include_patterns": { "type": "array", "items": { "type": "string" }, "description": "Glob patterns to include (e.g. *.go)" },
         "exclude_patterns": { "type": "array", "items": { "type": "string" }, "description": "Glob patterns to exclude (e.g. vendor/**)" },
         "max_file_size": { "type": "integer", "default": 1048576, "description": "Maximum file size in bytes (default 1MB)" }
@@ -281,12 +282,51 @@
       "description": "Output from repository_index tool",
       "properties": {
         "path": { "type": "string", "description": "Indexed path" },
+        "branch": { "type": "string", "description": "Git branch indexed" },
+        "collection_name": { "type": "string", "description": "Vector collection name" },
         "files_indexed": { "type": "integer", "description": "Number of files indexed" },
         "include_patterns": { "type": "array", "items": { "type": "string" }, "description": "Include patterns used" },
         "exclude_patterns": { "type": "array", "items": { "type": "string" }, "description": "Exclude patterns used" },
         "max_file_size": { "type": "integer", "description": "Max file size used" }
       },
-      "required": ["path", "files_indexed", "include_patterns", "exclude_patterns", "max_file_size"]
+      "required": ["path", "branch", "collection_name", "files_indexed", "include_patterns", "exclude_patterns", "max_file_size"]
+    },
+
+    "repository_search_input": {
+      "type": "object",
+      "description": "Input for repository_search tool",
+      "properties": {
+        "query": { "type": "string", "description": "Semantic search query" },
+        "project_path": { "type": "string", "description": "Project path to search within" },
+        "tenant_id": { "type": "string", "description": "Tenant identifier (defaults to git username)" },
+        "branch": { "type": "string", "description": "Filter by branch (empty = all branches)" },
+        "limit": { "type": "integer", "default": 10, "description": "Maximum results (default: 10)" }
+      },
+      "required": ["query", "project_path"]
+    },
+
+    "repository_search_output": {
+      "type": "object",
+      "description": "Output from repository_search tool",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "file_path": { "type": "string", "description": "File path" },
+              "content": { "type": "string", "description": "Matched content" },
+              "score": { "type": "number", "description": "Similarity score" },
+              "metadata": { "type": "object", "additionalProperties": true, "description": "Additional metadata" }
+            }
+          },
+          "description": "Search results with file paths and content"
+        },
+        "count": { "type": "integer", "description": "Number of results returned" },
+        "query": { "type": "string", "description": "Original search query" },
+        "branch": { "type": "string", "description": "Branch filter applied (if any)" }
+      },
+      "required": ["results", "count", "query"]
     },
 
     "troubleshoot_diagnose_input": {
@@ -441,6 +481,13 @@
           "properties": {
             "input": { "$ref": "#/$defs/repository_index_input" },
             "output": { "$ref": "#/$defs/repository_index_output" }
+          }
+        },
+        "repository_search": {
+          "type": "object",
+          "properties": {
+            "input": { "$ref": "#/$defs/repository_search_input" },
+            "output": { "$ref": "#/$defs/repository_search_output" }
           }
         },
         "troubleshoot_diagnose": {

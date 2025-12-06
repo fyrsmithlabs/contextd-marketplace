@@ -17,7 +17,7 @@ contextd provides cross-session memory and context management via MCP. Your lear
 | **Checkpoint** | `checkpoint_save`, `checkpoint_list`, `checkpoint_resume` | Context preservation |
 | **Remediation** | `remediation_search`, `remediation_record` | Error pattern tracking |
 | **Troubleshoot** | `troubleshoot_diagnose` | AI-powered error diagnosis |
-| **Repository** | `repository_index` | Semantic code search |
+| **Repository** | `repository_index`, `repository_search` | Semantic code indexing and search |
 
 ## When to Use Other Skills
 
