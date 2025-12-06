@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "contextd",
-      "source": ".",
+      "source": "./",
       "description": "Cross-session memory and context management for AI agents. Provides skills, agents, and includes for session lifecycle, checkpoints, error remediation, and persistent learning across sessions.",
       "version": "0.3.0",
       "author": {
@@ -32,16 +32,16 @@
         "persistence"
       ],
       "commands": [
-        "commands/checkpoint.md",
-        "commands/remember.md",
-        "commands/diagnose.md",
-        "commands/resume.md",
-        "commands/status.md",
-        "commands/search.md",
-        "commands/test-skill.md"
+        "./commands/checkpoint.md",
+        "./commands/remember.md",
+        "./commands/diagnose.md",
+        "./commands/resume.md",
+        "./commands/status.md",
+        "./commands/search.md",
+        "./commands/test-skill.md"
       ],
       "agents": [
-        "agents/contextd-task-executor.md"
+        "./agents/contextd-task-executor.md"
       ]
     }
   ]
