@@ -35,19 +35,43 @@ contextd provides cross-session memory and context management via MCP. Your lear
 
 **Confidence**: Memories have confidence scores (0-1) that adjust via feedback.
 
+## Code Search Priority (CRITICAL)
+
+**Always search contextd FIRST, fallback to Read/Grep:**
+
+| Priority | Tool | When |
+|----------|------|------|
+| **1st** | `repository_search` | Semantic code search - finds by meaning |
+| **2nd** | `memory_search` | Check past learnings |
+| **3rd** | Read/Grep/Glob | Fallback for specific files or exact matches |
+
+```
+# CORRECT workflow
+repository_search(query: "authentication handler", project_path: ".")
+→ Found relevant code? Use it
+→ Not indexed? repository_index(path: ".") then search
+
+# WRONG workflow
+grep "auth" **/*.go  ← Skipped contextd, wasted context
+```
+
+**Why:** Repository search is semantic (finds by meaning), preserves context (returns only relevant snippets), and improves over time. Raw file reads bloat context.
+
 ## Quick Start
 
 ```
-1. memory_search - "Have I solved this before?"
-2. Do the work
-3. memory_record - "What did I learn?"
-4. checkpoint_save - If session is long or context is high
+1. repository_search - "Where is this in the code?"
+2. memory_search - "Have I solved this before?"
+3. Do the work
+4. memory_record - "What did I learn?"
+5. checkpoint_save - If session is long or context is high
 ```
 
 ## Common Mistakes
 
 | Mistake | Fix |
 |---------|-----|
+| Using Read/Grep before contextd | `repository_search` FIRST, fallback to Read/Grep |
 | Not searching at task start | Always `memory_search` first |
 | Forgetting to record learnings | `memory_record` at task completion |
 | Letting context overflow | `checkpoint_save` at 70% |

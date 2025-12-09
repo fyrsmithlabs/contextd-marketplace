@@ -28,10 +28,11 @@ The learning loop: search before starting, record after completing. Your insight
 ```
 ┌─────────────────────────────────────────┐
 │  1. SEARCH at task start                │
-│     memory_search(project_id, query)    │
+│     repository_search(query, path)      │  ← Code first
+│     memory_search(project_id, query)    │  ← Then memories
 ├─────────────────────────────────────────┤
 │  2. DO the work                         │
-│     (apply relevant memories if found)  │
+│     (apply relevant code/memories)      │
 ├─────────────────────────────────────────┤
 │  3. RECORD at completion                │
 │     memory_record(project_id, title,    │
@@ -150,11 +151,28 @@ Memory should be searchable by both the decision AND the reasoning.
 
 **Before assuming something doesn't exist or needs to be designed from scratch:**
 
-1. `memory_search` - Have we solved this before?
-2. `checkpoint_list` - Is there recent work on this?
-3. `repository_index` search - Is there existing code/docs?
-4. `remediation_search` - Have we fixed related errors?
+| Priority | Tool | Purpose |
+|----------|------|---------|
+| **1st** | `repository_search` | Find existing code by meaning |
+| **2nd** | `memory_search` | Have we solved this before? |
+| **3rd** | `checkpoint_list` | Is there recent work on this? |
+| **4th** | `remediation_search` | Have we fixed related errors? |
+| **Last** | Read/Grep/Glob | Fallback for exact matches |
+
+```
+# CORRECT: contextd first
+repository_search(query: "user authentication", project_path: ".")
+memory_search(project_id: "myproject", query: "auth patterns")
+
+# WRONG: raw file search first
+grep -r "auth" src/  ← Bloats context, misses semantic matches
+```
+
+**Why repository_search FIRST:**
+- Semantic: finds code by meaning, not just keywords
+- Efficient: returns relevant snippets, not entire files
+- Branch-aware: knows what branch you're on
 
 **You will waste significant time re-discovering things that are already documented.**
 
-This conversation you're in right now? Previous sessions probably covered it. Search first.
+This conversation you're in right now? Previous sessions probably covered it. Search contextd first.

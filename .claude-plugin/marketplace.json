@@ -32,6 +32,7 @@
         "persistence"
       ],
       "commands": [
+        "./commands/init.md",
         "./commands/checkpoint.md",
         "./commands/remember.md",
         "./commands/diagnose.md",

@@ -14,8 +14,9 @@ Manages session lifecycle: prime context at start, extract learnings at end, aut
 | Trigger | Action |
 |---------|--------|
 | Session begins | Search memories + check for checkpoints |
+| After `git commit` | Re-index repository (captures branch + changes) |
 | Context > 70% | Save checkpoint before `/clear` |
-| Before `/clear` or end of work | Record learnings as memories |
+| Before `/clear` or end of work | Re-index repository + record learnings |
 
 ## Lifecycle Flow
 
@@ -27,14 +28,19 @@ Manages session lifecycle: prime context at start, extract learnings at end, aut
 
 2. DO THE WORK
    (apply memories, track progress)
+   → Use repository_search FIRST for code lookups
 
-3. CONTEXT THRESHOLD (if >70%)
+3. AFTER GIT COMMIT
+   repository_index(path: ".")
+   → Captures changes + current branch
+
+4. CONTEXT THRESHOLD (if >70%)
    checkpoint_save(..., auto_created: true)
    → Then /clear to reset context
 
-4. SESSION END
-   memory_record(project_id, title, content, outcome, tags)
-   → Capture learnings for next session
+5. SESSION END
+   repository_index(path: ".")   → Re-index changes
+   memory_record(...)            → Capture learnings
 ```
 
 ## Session Start Protocol
@@ -64,8 +70,17 @@ Manages session lifecycle: prime context at start, extract learnings at end, aut
 
 ## Session End Protocol
 
-**Before `/clear` or ending work, record learnings:**
+**Before `/clear` or ending work:**
 
+### Step 1: Re-index the repository
+```json
+{
+  "path": "/home/user/projects/contextd"
+}
+```
+This captures any code changes made during the session and updates branch metadata.
+
+### Step 2: Record learnings
 ```json
 {
   "project_id": "fyrsmithlabs_contextd",
@@ -118,15 +133,34 @@ Then run `/clear` to reset context.
 | Not offering checkpoint resume | Always ask user if checkpoint found |
 | Waiting until context overflow | Save checkpoint at 70%, not 95% |
 
+## Git Commit Re-index Protocol
+
+**After every `git commit`, re-index to capture changes:**
+
+```json
+{
+  "path": "."
+}
+```
+
+**Why:**
+- Captures code changes for semantic search
+- Updates branch metadata (useful for feature branches)
+- Ensures `repository_search` returns current code
+
+**Branch awareness:** `repository_index` auto-detects current branch. Working on `feature/auth`? The index knows.
+
 ## Quick Reference
 
 | When | Tools | Purpose |
 |------|-------|---------|
 | Session start | `memory_search`, `checkpoint_list` | Prime context |
+| Code lookup | `repository_search` | Semantic search (FIRST) |
+| After git commit | `repository_index` | Update index with changes |
 | Checkpoint found | `checkpoint_resume` | Resume previous work |
 | Context > 70% | `checkpoint_save`, then `/clear` | Preserve and reset |
-| Before `/clear` | `memory_record` | Capture learnings |
-| End of work | `memory_record`, optionally `checkpoint_save` | Save state |
+| Before `/clear` | `repository_index`, `memory_record` | Re-index + capture learnings |
+| End of work | `repository_index`, `memory_record` | Save state |
 
 ## CRITICAL
 
