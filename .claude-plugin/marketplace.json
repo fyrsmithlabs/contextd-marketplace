@@ -11,7 +11,10 @@
   "plugins": [
     {
       "name": "contextd",
-      "source": "fyrsmithlabs/contextd",
+      "source": {
+        "source": "github",
+        "repo": "fyrsmithlabs/contextd"
+      },
       "description": "Cross-session memory and context management for AI agents. Provides skills, commands, agents, and MCP server for session lifecycle, checkpoints, error remediation, and persistent learning.",
       "version": "0.3.0",
       "strict": true
