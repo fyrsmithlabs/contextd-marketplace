@@ -12,21 +12,9 @@
     {
       "name": "contextd",
       "source": "./",
-      "description": "Cross-session memory and context management for AI agents. Provides skills, commands, agents, and MCP server for session lifecycle, checkpoints, error remediation, and persistent learning.",
+      "description": "Cross-session memory and context management for AI agents.",
       "version": "0.3.0",
-      "strict": false,
-      "commands": [
-        "./commands/checkpoint.md",
-        "./commands/diagnose.md",
-        "./commands/init.md",
-        "./commands/remember.md",
-        "./commands/resume.md",
-        "./commands/search.md",
-        "./commands/status.md"
-      ],
-      "agents": [
-        "./agents/contextd-task-executor.md"
-      ]
+      "strict": true
     }
   ]
 }
