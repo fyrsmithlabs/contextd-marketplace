@@ -11,13 +11,22 @@
   "plugins": [
     {
       "name": "contextd",
-      "source": {
-        "source": "github",
-        "repo": "fyrsmithlabs/contextd"
-      },
+      "source": "./",
       "description": "Cross-session memory and context management for AI agents. Provides skills, commands, agents, and MCP server for session lifecycle, checkpoints, error remediation, and persistent learning.",
       "version": "0.3.0",
-      "strict": true
+      "strict": false,
+      "commands": [
+        "./commands/checkpoint.md",
+        "./commands/diagnose.md",
+        "./commands/init.md",
+        "./commands/remember.md",
+        "./commands/resume.md",
+        "./commands/search.md",
+        "./commands/status.md"
+      ],
+      "agents": [
+        "./agents/contextd-task-executor.md"
+      ]
     }
   ]
 }
