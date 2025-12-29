@@ -8,6 +8,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- **New Commands**: 8 additional commands synced from main contextd repo
+  - `/contextd:consensus-review` - Multi-agent code review (Security, Correctness, Architecture, UX)
+  - `/contextd:help` - Get help with contextd commands and capabilities
+  - `/contextd:install` - Install contextd server (Docker, Homebrew, or binary)
+  - `/contextd:onboard` - Interactive onboarding for new users
+  - `/contextd:policies` - View contextd security and operational policies
+  - `/contextd:reflect` - End-of-session reflection and learning capture
+  - `/contextd:statusline` - Configure contextd status line in Claude Code
+  - `_error-handling.md` - Internal error handling include
+- **New Agents**: 4 specialized agents for complex workflows
+  - `contextd:task-orchestrator` - Orchestrates complex multi-agent tasks using context-folding
+  - `contextd:systematic-debugging` - Systematic debugging with remediation search and playbook building
+  - `contextd:refactoring-agent` - Safe refactoring using context folding and rollback checkpoints
+  - `contextd:architecture-analyzer` - Deep architectural analysis using semantic search
+
+### Changed
+- Updated plugin.json to register all 15 commands (previously 7)
+- Updated plugin.json to register all 5 agents (previously 1)
+- README now documents all available commands and agents with descriptions
 
 ## [0.3.0] - 2025-12-26
 

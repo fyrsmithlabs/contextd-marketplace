@@ -106,11 +106,19 @@ Restart Claude Code to load both the MCP server and plugin.
 | Command | Purpose |
 |---------|---------|
 | `/contextd:checkpoint` | Save current session state |
-| `/contextd:remember` | Record a learning or insight |
+| `/contextd:consensus-review` | Multi-agent code review (Security, Correctness, Architecture, UX) |
 | `/contextd:diagnose` | Troubleshoot an error with AI diagnosis |
+| `/contextd:help` | Get help with contextd commands and capabilities |
+| `/contextd:init` | Initialize contextd for new/existing projects |
+| `/contextd:install` | Install contextd server (Docker, Homebrew, or binary) |
+| `/contextd:onboard` | Interactive onboarding for new users |
+| `/contextd:policies` | View contextd security and operational policies |
+| `/contextd:reflect` | End-of-session reflection and learning capture |
+| `/contextd:remember` | Record a learning or insight |
 | `/contextd:resume` | List and resume from checkpoints |
-| `/contextd:status` | Show contextd state for project |
 | `/contextd:search` | Search memories and remediations |
+| `/contextd:status` | Show contextd state for project |
+| `/contextd:statusline` | Configure contextd status line in Claude Code |
 | `/contextd:test-skill` | Run pressure tests against skills |
 
 ## Agents
@@ -118,10 +126,18 @@ Restart Claude Code to load both the MCP server and plugin.
 | Agent | Purpose |
 |-------|---------|
 | `contextd:contextd-task-executor` | Task executor enforcing contextd-first workflow with pre/post-flight checks |
+| `contextd:task-orchestrator` | Orchestrates complex multi-agent tasks using context-folding and short-lived collections |
+| `contextd:systematic-debugging` | Systematic debugging with remediation search, context folding, and debugging playbook |
+| `contextd:refactoring-agent` | Safe refactoring using context folding, ReasoningBank patterns, and rollback checkpoints |
+| `contextd:architecture-analyzer` | Deep architectural analysis using semantic search and context folding |
 
 Use with the Task tool:
 ```
 Task(subagent_type="contextd:contextd-task-executor", prompt="...")
+Task(subagent_type="contextd:task-orchestrator", prompt="...")
+Task(subagent_type="contextd:systematic-debugging", prompt="...")
+Task(subagent_type="contextd:refactoring-agent", prompt="...")
+Task(subagent_type="contextd:architecture-analyzer", prompt="...")
 ```
 
 ## Includes
