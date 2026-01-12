@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+## [0.3.1] - 2026-01-12
+
+### Changed
+- Bumped to match contextd v0.3.1 upstream release
+- Upstream changes (internal):
+  - Real LLM API Integration for extraction (Claude/OpenAI)
+  - Version management automation (CI validation)
+  - Interface migration cleanup (removed dead code)
+
 ## [0.3.0] - 2025-12-26
 
 ### Added
