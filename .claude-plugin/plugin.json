@@ -8,15 +8,27 @@
   },
   "commands": [
     "../commands/checkpoint.md",
+    "../commands/consensus-review.md",
     "../commands/diagnose.md",
+    "../commands/help.md",
     "../commands/init.md",
+    "../commands/install.md",
+    "../commands/onboard.md",
+    "../commands/policies.md",
+    "../commands/reflect.md",
     "../commands/remember.md",
     "../commands/resume.md",
     "../commands/search.md",
-    "../commands/status.md"
+    "../commands/status.md",
+    "../commands/statusline.md",
+    "../commands/test-skill.md"
   ],
   "agents": [
-    "../agents/contextd-task-executor.md"
+    "../agents/contextd-task-executor.md",
+    "../agents/task-orchestrator.md",
+    "../agents/systematic-debugging.md",
+    "../agents/refactoring-agent.md",
+    "../agents/architecture-analyzer.md"
   ],
   "mcpServers": {
     "contextd": {
